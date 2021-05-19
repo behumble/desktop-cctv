@@ -30,6 +30,7 @@ find out files under `~/Pictures/desktop-cctv/`
 ### Periodic capture (e.g. every 1 min.)
 
 - ensure [pm2 has installed](https://pm2.keymetrics.io/docs/usage/quick-start/#installation)
+- ensure [pm2 has installed as a start-up script](https://pm2.keymetrics.io/docs/usage/startup/)
 
 ```bash
 pm2 start dist/index.js --name desktop-cctv --cron '0 * * * * *' --no-autorestart
