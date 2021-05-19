@@ -1,0 +1,23 @@
+{
+  "name": "desktop-cctv",
+  "version": "0.0.1",
+  "description": "Periodic desktop capture",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc && npm start",
+    "start": "node dist/index.js"
+  },
+  "author": "Alan Goo <behumble@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.169",
+    "@types/luxon": "^1.26.5",
+    "@types/node": "^15.3.0",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "luxon": "^1.27.0"
+  }
+}
