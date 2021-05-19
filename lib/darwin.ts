@@ -37,7 +37,7 @@ export default class MacDesktop implements Desktop {
         // ensure the required directory
         const dir = path.dirname(outPath)
         !fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true })
-        const cmdline = `${CMD_SCREENCAPTURE} -x -D${display.id} "${outPath}"`
+        const cmdline = `${CMD_SCREENCAPTURE} -C -x -D${display.id} "${outPath}"`
         console.log(cmdline)
         exec2text(cmdline)
     }
