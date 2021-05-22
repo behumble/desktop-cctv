@@ -1,12 +1,10 @@
 import * as _ from 'lodash'
 import { DateTime } from 'luxon'
-import fs from 'fs'
 import os from 'os'
 import path from 'path'
 import { Desktop, Display, exec2text, execIntoObject } from '..'
 
 const MAC_DIR_PICTURES = 'Pictures'
-const DIRNAME_APP = 'desktop-cctv'
 const CMD_SCREENCAPTURE = 'screencapture'
 
 export default class MacDesktop implements Desktop {
@@ -24,19 +22,20 @@ export default class MacDesktop implements Desktop {
         return result
     }
 
-    createOutputFilePath(display: Display): string {
+    getUserPicturesFolder(): string {
+        return path.join(os.homedir(), MAC_DIR_PICTURES)
+    }
+
+    createOutputFilePath(cctvRoot:string, display:Display): string {
         // ~/Pictures/desktop-cctv/2021/05/18/19_55_00-Color LCD.png
         const current = DateTime.now()
         // part after 'desktop-cctv'
         const lastPath = `${current.toFormat('yyyy/MM/dd/HH_mm_ss')}-${display.name}.png`
-        const result = path.join(os.homedir(), MAC_DIR_PICTURES, DIRNAME_APP, lastPath)
+        const result = path.join(cctvRoot, lastPath)
         return result
     }
 
     captureTo(display: Display, outPath: string): void {
-        // ensure the required directory
-        const dir = path.dirname(outPath)
-        !fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true })
         const cmdline = `${CMD_SCREENCAPTURE} -C -x -D${display.id} "${outPath}"`
         console.log(cmdline)
         exec2text(cmdline)
