@@ -6,7 +6,8 @@ import { Desktop, Display, exec2text, execIntoObject } from '..'
 
 const MAC_DIR_PICTURES = 'Pictures'
 const CMD_SCREENCAPTURE = 'screencapture'
-
+const CMD_RESIZER = `sips`
+const MAX_SIZE_RESIZER = 1680
 export default class MacDesktop implements Desktop {
     retrieveDisplays(): Display[] {
         const dispInfo = execIntoObject('system_profiler SPDisplaysDataType -json')['SPDisplaysDataType']
@@ -39,5 +40,6 @@ export default class MacDesktop implements Desktop {
         const cmdline = `${CMD_SCREENCAPTURE} -C -x -D${display.id} "${outPath}"`
         console.log(cmdline)
         exec2text(cmdline)
+        console.log(exec2text(`${CMD_RESIZER} -Z ${MAX_SIZE_RESIZER} "${outPath}"`))
     }
 }
